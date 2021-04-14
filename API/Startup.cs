@@ -18,7 +18,7 @@ using API.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using API.Extensions;
+using API.Extensions;//namespace use for adding api extensions..
 
 namespace API
 {
@@ -58,7 +58,7 @@ namespace API
             app.UseHttpsRedirection();
 
             app.UseRouting();
-            //ordering is very important here , !)usecors 2) authentication 3)authorization
+            //ordering is very important here , 1)usecors 2) authentication 3)authorization
             app.UseCors(x=>x.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200"));
             app.UseAuthentication();
             app.UseAuthorization();
