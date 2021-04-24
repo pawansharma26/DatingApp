@@ -19,6 +19,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using API.Extensions;//namespace use for adding api extensions..
+using API.Middleware;
 
 namespace API
 {
@@ -50,11 +51,15 @@ namespace API
         {
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
+               // app.UseDeveloperExceptionPage();
+                  app.UseMiddleware<ExceptionMiddleware>();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "API v1"));
             }
-
+            else{
+   app.UseMiddleware<ExceptionMiddleware>();
+            }
+         
             app.UseHttpsRedirection();
 
             app.UseRouting();
