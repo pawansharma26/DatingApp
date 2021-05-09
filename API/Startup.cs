@@ -64,13 +64,17 @@ namespace API
 
             app.UseRouting();
             //ordering is very important here , 1)usecors 2) authentication 3)authorization
-            app.UseCors(x=>x.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200"));
+            // app.UseCors(x=>x.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200"));
+         app.UseCors(x=>x.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://avonkhana.in"));
             app.UseAuthentication();
             app.UseAuthorization();
-
+//for publishing
+app.UseDefaultFiles();
+app.UseStaticFiles();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapFallbackToController("Index","Fallback");
             });
         }
     }
