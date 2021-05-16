@@ -10,10 +10,14 @@ namespace API.Helpers
     {
         public AutoMapperProfiles()
         {
-            CreateMap<AppUser, MemberDto>();
+            //   CreateMap<AppUser, MemberDto>();
+            //   CreateMap<Photo, PhotoDto>();
+            //Implement this in autmapperprofile for getting photoUrl filed outside photo
+                CreateMap<AppUser, MemberDto>().ForMember
+                (dest => dest.PhotoUrl, opt => opt.MapFrom(src => 
+                 src.Photos.FirstOrDefault(x => x.IsMain).Url));
               CreateMap<Photo, PhotoDto>();
-            //     .ForMember(dest => dest.PhotoUrl, opt => opt.MapFrom(src => 
-            //         src.Photos.FirstOrDefault(x => x.IsMain).Url))
+          
             //     .ForMember(dest => dest.Age, opt => opt.MapFrom(src => src.DateOfBirth.CalculateAge()));
             // CreateMap<Photo, PhotoDto>();
         }
