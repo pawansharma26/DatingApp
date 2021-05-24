@@ -4,8 +4,8 @@ import { ToastrService } from 'ngx-toastr';
 import { take } from 'rxjs/operators';
 import { Member } from 'src/app/_models/member';
 import { User } from 'src/app/_models/user';
-import { AccountsService } from 'src/app/_services/accounts.service';
-import { MemberService } from 'src/app/_services/member.service';
+import { AccountsService } from 'src/app/_services/accounts.service'; 
+import { MembersService } from 'src/app/_services/members.service';
 
 @Component({
   selector: 'app-member-edit',
@@ -21,7 +21,7 @@ user:User;
     $event.returnValue = true;
   }
 }
-  constructor(private accountService:AccountsService,private memberService:MemberService,
+  constructor(private accountService:AccountsService,private membersService:MembersService,
     private toastr:ToastrService) {
 accountService.currentUser$.pipe(take(1)).subscribe(user=>this.user=user);
    }
@@ -32,7 +32,7 @@ accountService.currentUser$.pipe(take(1)).subscribe(user=>this.user=user);
 
   loadMember()
   {
-    this.memberService.getMember(this.user.username).subscribe(member=>
+    this.membersService.getMember(this.user.username).subscribe(member=>
 {this.member=member;
 }
     )
@@ -40,7 +40,7 @@ accountService.currentUser$.pipe(take(1)).subscribe(user=>this.user=user);
   
 updateMember()
 {
-this.memberService.updateMember(this.member).subscribe(
+this.membersService.updateMember(this.member).subscribe(
   ()=>
   {
     this.toastr.success("Profile updated successfully");
