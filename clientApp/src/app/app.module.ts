@@ -25,6 +25,7 @@ import { LoadingInterceptor } from './_interceptors/loading.interceptor';
 import { PhotoEditorComponent } from './members/photo-editor/photo-editor.component'; 
 import { TdfvalidationComponent } from './tdfvalidation/tdfvalidation.component'; 
 import { TextInputComponent } from './_forms/text-input/text-input.component';
+import { DateInputComponent } from './_forms/date-input/date-input.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,7 +43,8 @@ import { TextInputComponent } from './_forms/text-input/text-input.component';
     MemberEditComponent,
     PhotoEditorComponent,
     TdfvalidationComponent ,
-    TextInputComponent
+    TextInputComponent,
+    DateInputComponent
   ],
   imports: [
     BrowserModule,

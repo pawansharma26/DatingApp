@@ -20,10 +20,4 @@ export class TextInputComponent implements ControlValueAccessor {
   }
   registerOnTouched(fn: any): void { 
   }
-  setDisabledState?(isDisabled: boolean): void { 
-  }
-
-  ngOnInit(): void {
-  }
-
-}
+ }
