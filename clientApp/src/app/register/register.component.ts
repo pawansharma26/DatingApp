@@ -23,8 +23,8 @@ initializeForm()
 {
 this.registerForm=new FormGroup(
   {
-    username:new FormControl('Pawan',Validators.required),
-    password:new FormControl('',[Validators.required,Validators.minLength(4),Validators.maxLength(7)]),
+    username:new FormControl('',Validators.required),
+    password:new FormControl('',[Validators.required,Validators.minLength(4),Validators.maxLength(8)]),
     confirmPassword:new FormControl ('', [Validators.required, this.matchValues('password')])
   }
 )
