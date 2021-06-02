@@ -18,6 +18,10 @@
           <li class="nav-item">
             <a class="nav-link" routerLink='/errors' routerLinkActive='active'>Errors</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink='/tdfvalidation' routerLinkActive='active'>TDF Validations</a>
+          </li>
+          
              </ul>
 <div class="dropdown" *ngIf="(currentUser$|async) as user" dropdown>
   <img src="{{user.photoUrl}}" alt="{{user.username}}">
