@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { AccountsService } from '../_services/accounts.service'; 
 @Component({
@@ -13,7 +13,8 @@ model:any={};
 @Output() cancelRegister=new EventEmitter();
 
 constructor(private accountService:AccountsService,
-  private toastr:ToastrService) { }
+  private toastr:ToastrService,
+  private fb:FormBuilder) { }
 
   ngOnInit(): void {
     this.initializeForm();
@@ -21,11 +22,11 @@ constructor(private accountService:AccountsService,
 
 initializeForm()
 {
-this.registerForm=new FormGroup(
+this.registerForm=this.fb.group(
   {
-    username:new FormControl('',Validators.required),
-    password:new FormControl('',[Validators.required,Validators.minLength(4),Validators.maxLength(8)]),
-    confirmPassword:new FormControl ('', [Validators.required, this.matchValues('password')])
+    username:['',Validators.required],
+    password:['',[Validators.required,Validators.minLength(4),Validators.maxLength(8)]],
+    confirmPassword:['', [Validators.required, this.matchValues('password')]]
   }
 )
 
