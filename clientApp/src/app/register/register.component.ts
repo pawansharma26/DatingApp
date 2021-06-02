@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { AccountsService } from '../_services/accounts.service'; 
 @Component({
@@ -23,11 +23,26 @@ initializeForm()
 {
 this.registerForm=new FormGroup(
   {
-    username:new FormControl(),
-    password:new FormControl(),
-    confirmPassword:new FormControl()
+    username:new FormControl('Pawan',Validators.required),
+    password:new FormControl('',[Validators.required,Validators.minLength(4),Validators.maxLength(7)]),
+    confirmPassword:new FormControl ('', [Validators.required, this.matchValues('password')])
   }
 )
+
+//if password field changes then update updateValueAndValidity of confirmPassword field
+this.registerForm.controls.password.valueChanges.subscribe(()=>
+{
+  this.registerForm.controls.confirmPassword.updateValueAndValidity();
+})
+
+}
+
+//if password matches it will return null otherwise an error isMtching 
+matchValues(matchTo: string): ValidatorFn {
+  return (control: AbstractControl) => {
+    return control?.value === control?.parent?.controls[matchTo].value 
+      ? null : {isMatching: true}
+  }
 }
 
   cancel()
