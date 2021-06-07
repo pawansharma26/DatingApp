@@ -19,6 +19,7 @@ pageSize=5;
   ngOnInit(): void {
     this.loadMembers();
   }
+
   loadMembers()
   {
     this.memberService.getMembers(this.pageNumber,this.pageSize).subscribe(
@@ -28,6 +29,11 @@ pageSize=5;
         this.pagination=response.pagination;
       }
     )
+  }
+
+  pageChanged(event: any) {
+    this.pageNumber = event.page;
+    this.loadMembers();
   }
 
 }
