@@ -4,7 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { take } from 'rxjs/operators';
 import { Member } from 'src/app/_models/member';
 import { User } from 'src/app/_models/user';
-import { AccountsService } from 'src/app/_services/accounts.service'; 
+import { AccountService } from 'src/app/_services/account.service'; 
 import { MembersService } from 'src/app/_services/members.service';
 
 @Component({
@@ -21,7 +21,7 @@ user:User;
     $event.returnValue = true;
   }
 }
-  constructor(private accountService:AccountsService,private membersService:MembersService,
+  constructor(private accountService:AccountService,private membersService:MembersService,
     private toastr:ToastrService) {
 accountService.currentUser$.pipe(take(1)).subscribe(user=>this.user=user);
    }

@@ -7,7 +7,7 @@ import { User } from '../_models/user';
 @Injectable({
   providedIn: 'root'
 })
-export class AccountsService {
+export class AccountService {
 baseURL=environment.apiUrl;
 private currentUserSource=new ReplaySubject<User>(1);
 currentUser$=this.currentUserSource.asObservable();

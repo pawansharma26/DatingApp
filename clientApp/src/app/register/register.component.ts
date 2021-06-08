@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { AccountsService } from '../_services/accounts.service'; 
+import { AccountService } from '../_services/account.service'; 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -15,7 +15,7 @@ model:any={};
 maxDate:Date;
 validationErrors: string[] = [];
 
-constructor(private accountService:AccountsService,
+constructor(private accountService:AccountService,
   private toastr:ToastrService,private router:Router,
   private fb:FormBuilder) { }
 
