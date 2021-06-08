@@ -26,8 +26,13 @@ export class MembersService {
     return params;
   }
   getMember(username: string) {
-    const member = this.members.find(x => x.username === username);
-    if (member !== undefined) return of(member);
+    const member = [...this.memberCache.values()]
+      .reduce((arr, elem) => arr.concat(elem.result), [])
+      .find((member: Member) => member.username === username);
+
+    if (member) {
+      return of(member);
+    }
     return this.http.get<Member>(this.baseUrl + 'users/' + username);
   }
 
@@ -52,7 +57,7 @@ export class MembersService {
     if (response) {
       return of(response);
     }
-
+    console.log(this.memberCache);
     let params= this.getPaginationHeaders(userParams.pageNumber,userParams.pageSize);
     
     params=params.append('minAge',userParams.minAge.toString());
