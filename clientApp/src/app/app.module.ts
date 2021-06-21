@@ -33,6 +33,7 @@ import { UserManagementComponent } from './admin/user-management/user-management
 import { PhotoManagementComponent } from './admin/photo-management/photo-management.component';
 import { RolesModalComponent } from './modals/roles-modal/roles-modal.component';
 import { HighlightDirective } from './_directives/highlight.directive';
+import { ConfirmDialogComponent } from './modals/confirm-dialog/confirm-dialog.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -58,7 +59,8 @@ import { HighlightDirective } from './_directives/highlight.directive';
     UserManagementComponent,
     PhotoManagementComponent,
     RolesModalComponent,
-    HighlightDirective
+    HighlightDirective,
+    ConfirmDialogComponent
   ],
   imports: [
     BrowserModule,
