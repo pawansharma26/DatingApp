@@ -20,6 +20,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using API.Extensions;//namespace use for adding api extensions..
 using API.Middleware;
+using API.SignalR;
 
 namespace API
 {
@@ -39,6 +40,7 @@ namespace API
             services.AddCors();
                         //Add Below code for applying authentication
    services.AddIdentityServices(_config);
+    services.AddSignalR();
   //Ends here
             services.AddSwaggerGen(c =>
             {
@@ -64,7 +66,9 @@ namespace API
 
             app.UseRouting();
             //ordering is very important here , 1)usecors 2) authentication 3)authorization
-            app.UseCors(x=>x.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200"));
+            app.UseCors(x=>x.AllowAnyHeader().AllowAnyMethod()
+            .AllowCredentials()
+            .WithOrigins("https://localhost:4200"));
         //  app.UseCors(x=>x.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://avonkhana.in"));
             app.UseAuthentication();
             app.UseAuthorization();
@@ -75,6 +79,8 @@ namespace API
             {
                 endpoints.MapControllers();
                 // endpoints.MapFallbackToController("Index","Fallback");
+                endpoints.MapHub<PresenceHub>("hubs/presence");
+                endpoints.MapHub<MessageHub>("hubs/message");
             });
         }
     }
